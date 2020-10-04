@@ -9,7 +9,10 @@
 #include "STD_TYPES.h"
 #include "BIT_MATH.h"
 
+#include "GPIO_interface.h"
+
 #include "TFT_interface.h"
+#include "PB_interface.h"
 
 #include "DigitalClock.h"
 #include "DigitalClock_Config.h"
@@ -26,6 +29,19 @@ void DigitalClockinit()
 	TFT_voidPrintText(40, 80, Weekday[DayNameIndex], 0xE61F, 0);
 }
 
+void ClockUserSetCheck()
+{
+
+	u8 temp  = 0;
+	temp = PB_GetState(PB_HOUR);
+	if (temp  == PB_PRE_RELEASED)
+		TimeHour++;
+	temp = PB_GetState(PB_MINIUTE);
+		if (temp  == PB_PRE_RELEASED)
+			TimeMin++;
+
+}
+
 void updateClock()
 {
 	UpdateTime();
@@ -39,7 +55,12 @@ void updateClock()
 		TFT_voidPrintText(90, 60, "AM", 0x7F9D, 0);
 	}
 }
-void UpdateTime(void) {
+
+
+/******** Private Functions ************/
+
+void UpdateTime(void)
+{
 	TimeSec++;
 	if (TimeSec > 59) {
 		TimeSec = 0;
@@ -118,7 +139,9 @@ void updateDisplayStrings() {
 	AppendChar(Time, ':');
 	AppendIntegerToString(Time, TimeSec);
 }
-void AppendChar(u8 * string, u8 charToAppend) {
+
+void AppendChar(u8 * string, u8 charToAppend)
+{
 	while (*(string++) != '\0')
 		;
 	*string--;

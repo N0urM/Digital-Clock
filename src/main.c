@@ -6,8 +6,14 @@
 #include "STK_interface.h"
 #include "SPI_interface.h"
 
+#include "PB_interface.h"
 #include "TFT_interface.h"
 #include "DigitalClock.h"
+
+
+void stkInterruptFunction(){
+	updateClock();
+}
 
 void main(void) {
 
@@ -24,17 +30,20 @@ void main(void) {
 	GPIO_voidInitPortPinDirection(PORTA, PIN6, INPUT_FLOATING);		// MISO PIN
 	GPIO_voidInitPortPinDirection(PORTA, PIN7, AF_PUSH_PULL_10MHZ);	// MOSI PIN
 
+	PB_Init(PORTB , PIN0 , PB_MINIUTE , PB_RELEASED);
+	PB_Init(PORTB , PIN1 , PB_HOUR    , PB_RELEASED);
 	/* Init Peripherals */
 	STK_voidInit();
 	SPI_voidInit();
 	TFT_voidInit();
 	TFT_voidFillColor(0);
 	DigitalClockinit();
+	STK_voidSetIntervalPeriodic(1000000 , stkInterruptFunction);
 
 	while (1)
 	{
-		STK_voidSetBusyWait(1000000); // 1m tick (us) = 1s delay
-		updateClock();
+		PB_Update();
+		ClockUserSetCheck();
 
 	}
 }
