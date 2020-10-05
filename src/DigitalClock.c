@@ -1,8 +1,8 @@
 /********************************************************/
 /* Author : Nourhan Mansour                             */
-/* Date   : 27/9/2020                                   */
+/* Date   :  4/10/2020                                  */
 /* Version: 1.0                                         */
-/* File   : TFT_program.c                               */
+/* File   : DigitalClock.c                              */
 /********************************************************/
 
 // 1- include Libraries
