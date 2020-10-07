@@ -11,10 +11,6 @@
 #include "DigitalClock.h"
 
 
-void stkInterruptFunction(){
-	updateClock();
-}
-
 void main(void) {
 
 	/* Enable Clock */
@@ -38,7 +34,7 @@ void main(void) {
 	TFT_voidInit();
 	TFT_voidFillColor(0);
 	DigitalClockinit();
-	STK_voidSetIntervalPeriodic(1000000 , stkInterruptFunction);
+	STK_voidSetIntervalPeriodic(1000000 , updateClock);
 
 	while (1)
 	{

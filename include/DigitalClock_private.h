@@ -17,8 +17,8 @@ void updateDisplayStrings(void);
 // Private variables
 u8 Date[20] = { 0 };
 u8 Time[20] = { 0 };
-const u8 * Weekday[7] = { "Saturday", "Sunday", "Monday", "Tuesday",
-		"Wednesday", "Thursday", "Friday" };
+const u8 * Weekday[7] = { "Saturday ", "Sunday   ", "Monday   ", "Tuesday  ",
+		"Wednesday", "Thursday ", "Friday   " };
 const u8 Monthdays[15] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 u8 TimeHourToDisplay;
 

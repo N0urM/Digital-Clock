@@ -119,10 +119,16 @@ void AppendIntegerToString(u8 * string, u16 integer) {
 }
 
 void updateDisplayStrings() {
-	if (TimeHour > 12) {
+	if (TimeHour == 12 ){
+		TimeHourToDisplay = TimeHour;
+		TimeMode = 1; // PM
+	}
+	else if (TimeHour > 12) {
 		TimeHourToDisplay = TimeHour - 12;
 		TimeMode = 1; // PM
-	} else {
+	}
+	else
+	{
 		TimeHourToDisplay = TimeHour;
 		TimeMode = 0; // AM
 	}
